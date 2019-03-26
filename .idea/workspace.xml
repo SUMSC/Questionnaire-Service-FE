@@ -1,0 +1,660 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d7419750-e889-4270-ac8a-c81b12bb7c15" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eform/public/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eform/src/common/font/font.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eform/src/components/ActivityForms/NameForm.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eform/src/components/ActivityForms/PasswordForm.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eform/src/components/ActivityForms/PhoneNumberForm.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eform/src/components/ActivityForms/RateForm.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eform/src/components/ActivityForms/TextForm.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eform/src/components/ActivityList/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eform/src/components/HomeMenu/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eform/src/components/LoginSheet/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eform/src/components/Tabbar/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eform/src/plugin/mand-mobile.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eform/src/plugin/vant.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eform/src/plugin/vue-awesome-swiper.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eform/src/store/actions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eform/src/store/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eform/src/store/modules/notice.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eform/src/store/modules/search.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eform/src/store/mutation-types.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eform/src/store/mutations.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eform/src/views/About/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eform/src/views/ActivityForm/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eform/src/views/ActivityInfo/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eform/src/views/CreatedActivity/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eform/src/views/HomeContent/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eform/src/views/HomeSearch/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eform/src/views/JoinedActivity/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eform/src/views/Mine/index.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/app.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/controller.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/controllers/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eform/babel.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/eform/babel.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eform/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/eform/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eform/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/eform/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eform/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/eform/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eform/src/assets/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eform/src/components/HelloWorld.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eform/src/main.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eform/src/router.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eform/src/shims-tsx.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eform/src/shims-vue.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eform/src/store.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eform/src/views/About.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eform/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/eform/src/views/home/index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eform/tsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/eform/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/eform/yarn.lock" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/eForm_FE$app.coverage" NAME="app Coverage Results" MODIFIED="1552824491640" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="273">
+              <caret line="13" selection-start-line="13" selection-end-line="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/eform/src/views/Home/index.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+        <option value="Python Script" />
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+        <option value="Vue Single File Component" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>vue/cli-s</find>
+      <find>Homc</find>
+      <find>eform/</find>
+      <find>eform/src/views/HomcContent</find>
+      <find>var</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>let</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/eform/src/components/Login/index.vue" />
+        <option value="$PROJECT_DIR$/eform/src/views/UserInfo/index.vue" />
+        <option value="$PROJECT_DIR$/eform/src/components/LoginSheet/index.vue" />
+        <option value="$PROJECT_DIR$/eform/src/store/actions.js" />
+        <option value="$PROJECT_DIR$/eform/src/components/Home/HomeMenu.vue" />
+        <option value="$PROJECT_DIR$/eform/src/views/Home/HomeContent.vue" />
+        <option value="$PROJECT_DIR$/eform/src/views/HomcContent/HomeContent.vue" />
+        <option value="$PROJECT_DIR$/eform/src/views/HomcContent/index.vue" />
+        <option value="$PROJECT_DIR$/eform/src/store/modules/notice.js" />
+        <option value="$PROJECT_DIR$/eform/src/store/modules/search.js" />
+        <option value="$PROJECT_DIR$/eform/public/index.html" />
+        <option value="$PROJECT_DIR$/eform/src/plugin/mint-ui.js" />
+        <option value="$PROJECT_DIR$/eform/src/main.js" />
+        <option value="$PROJECT_DIR$/eform/babel.config.js" />
+        <option value="$PROJECT_DIR$/eform/src/plugin/mand-mobile.js" />
+        <option value="$PROJECT_DIR$/eform/src/views/Home/index.vue" />
+        <option value="$PROJECT_DIR$/eform/src/components/HomeSearchList/index.vue" />
+        <option value="$PROJECT_DIR$/eform/src/views/Create/index.vue" />
+        <option value="$PROJECT_DIR$/eform/src/components/CreateActivityDialog/index.vue" />
+        <option value="$PROJECT_DIR$/eform/src/store/mutation-types.js" />
+        <option value="$PROJECT_DIR$/eform/src/store/mutations.js" />
+        <option value="$PROJECT_DIR$/eform/src/store/index.js" />
+        <option value="$PROJECT_DIR$/eform/src/components/HomeMenu/index.vue" />
+        <option value="$PROJECT_DIR$/app.py" />
+        <option value="$PROJECT_DIR$/eform/src/views/CreatedActivity/index.js" />
+        <option value="$PROJECT_DIR$/eform/src/views/JoinedActivity/index.js" />
+        <option value="$PROJECT_DIR$/eform/src/views/CreatedActivity/index.vue" />
+        <option value="$PROJECT_DIR$/eform/src/views/About/index.vue" />
+        <option value="$PROJECT_DIR$/eform/src/views/JoinedActivity/index.vue" />
+        <option value="$PROJECT_DIR$/eform/src/views/HomeContent/index.vue" />
+        <option value="$PROJECT_DIR$/eform/src/common/font/font.css" />
+        <option value="$PROJECT_DIR$/eform/src/plugin/vant.js" />
+        <option value="$PROJECT_DIR$/eform/public/index.css" />
+        <option value="$PROJECT_DIR$/eform/src/views/HomeSearch/index.vue" />
+        <option value="$PROJECT_DIR$/eform/src/components/ActivityList/index.vue" />
+        <option value="$PROJECT_DIR$/server/index.js" />
+        <option value="$PROJECT_DIR$/server/controllers/hello.js" />
+        <option value="$PROJECT_DIR$/eform/src/views/Mine/index.vue" />
+        <option value="$PROJECT_DIR$/eform/src/router.js" />
+        <option value="$PROJECT_DIR$/eform/src/App.vue" />
+        <option value="$PROJECT_DIR$/eform/src/views/ActivityInfo/index.vue" />
+        <option value="$PROJECT_DIR$/eform/src/components/ActivityForms/index.vue" />
+        <option value="$PROJECT_DIR$/eform/src/views/ActivityForm/index.vue" />
+        <option value="$PROJECT_DIR$/eform/src/components/ActivityForms/TextForm.vue" />
+        <option value="$PROJECT_DIR$/eform/src/components/ActivityForms/PhoneNumberForm.vue" />
+        <option value="$PROJECT_DIR$/eform/src/components/ActivityForms/RateForm.vue" />
+        <option value="$PROJECT_DIR$/eform/src/components/ActivityForms/PasswordForm.vue" />
+        <option value="$PROJECT_DIR$/eform/src/components/ActivityForms/NameForm.vue" />
+        <option value="$PROJECT_DIR$/server/controllers/index.js" />
+        <option value="$PROJECT_DIR$/server/controller.js" />
+        <option value="$PROJECT_DIR$/server/app.js" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="1222" />
+    <option name="width" value="1278" />
+    <option name="height" value="1447" />
+  </component>
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="eForm-FE" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eForm-FE" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eForm-FE" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eForm-FE" type="462c0819:PsiDirectoryNode" />
+              <item name="eform" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eForm-FE" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eForm-FE" type="462c0819:PsiDirectoryNode" />
+              <item name="eform" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eForm-FE" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eForm-FE" type="462c0819:PsiDirectoryNode" />
+              <item name="eform" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="eForm-FE" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eForm-FE" type="462c0819:PsiDirectoryNode" />
+              <item name="eform" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="Home" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="javascript.nodejs.core.library.configured.version" value="8.11.3" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="ts.external.directory.path" value="D:\Tools\apps\PyCharm-P\ch-0\183.5912.18\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Amber\Projects\eForm-FE\eform\src\views\HomeSearch" />
+      <recent name="D:\Amber\Projects\eForm-FE\eform\src\views\HomcContent" />
+      <recent name="D:\Amber\Projects\eForm-FE\eform\src\components\HomeMenu" />
+      <recent name="D:\Amber\Projects\eForm-FE\eform\src\components\Tabbar" />
+      <recent name="D:\Amber\Projects\eForm-FE\eform\src\assets" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Node.js.app.js">
+    <configuration name="app.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="app.js" working-dir="$PROJECT_DIR$/server">
+      <method v="2" />
+    </configuration>
+    <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="eForm-FE" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/app.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Node.js.app.js" />
+      <item itemvalue="Python.app" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Node.js.app.js" />
+        <item itemvalue="Python.app" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d7419750-e889-4270-ac8a-c81b12bb7c15" name="Default Changelist" comment="" />
+      <created>1552618356804</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1552618356804</updated>
+      <workItem from="1552618381122" duration="2119000" />
+      <workItem from="1552620766423" duration="3634000" />
+      <workItem from="1552626917305" duration="5350000" />
+      <workItem from="1552634855842" duration="10857000" />
+      <workItem from="1552647225139" duration="6647000" />
+      <workItem from="1552654134234" duration="1220000" />
+      <workItem from="1552705141030" duration="591000" />
+      <workItem from="1552724976069" duration="11588000" />
+      <workItem from="1552805934233" duration="14576000" />
+      <workItem from="1552888553945" duration="10319000" />
+      <workItem from="1552976683970" duration="597000" />
+      <workItem from="1553068467092" duration="270000" />
+      <workItem from="1553084267482" duration="658000" />
+      <workItem from="1553086228365" duration="4250000" />
+      <workItem from="1553146628940" duration="8262000" />
+      <workItem from="1553332381407" duration="24000" />
+      <workItem from="1553498292668" duration="6000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="80968000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="1222" y="0" width="1278" height="1447" extended-state="0" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.272578" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32901752" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32901752" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="TypeScript" order="10" weight="0.3298969" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="12" weight="0.2970297" />
+      <window_info anchor="bottom" id="Python Console" order="13" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/eform/src/views/Discover/index.vue" />
+    <entry file="file://$PROJECT_DIR$/eform/src/components/LoginSheet/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="9" column="14" lean-forward="true" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/src/components/Tabbar/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/src/store/modules/notice.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="7" column="16" lean-forward="true" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/src/plugin/mint-ui.js" />
+    <entry file="file://$PROJECT_DIR$/eform/node_modules/mand-mobile/types/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/src/store/modules/search.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="15" column="10" lean-forward="true" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/src/views/Create/index.vue" />
+    <entry file="file://$PROJECT_DIR$/eform/src/components/CreateActivityDialog/index.vue" />
+    <entry file="file://$PROJECT_DIR$/eform/src/plugin/mand-mobile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/public/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="9" column="9" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/src/store/actions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="8" column="16" lean-forward="true" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.py" />
+    <entry file="file://$PROJECT_DIR$/eform/src/views/UserInfo/index.vue" />
+    <entry file="file://$PROJECT_DIR$/eform/src/views/JoinedActivity/index.js" />
+    <entry file="file://$PROJECT_DIR$/eform/src/views/CreatedActivity/index.js" />
+    <entry file="file://$PROJECT_DIR$/eform/node_modules/vuex/types/index.d.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/src/store/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="24" column="2" lean-forward="true" selection-start-line="24" selection-start-column="2" selection-end-line="24" selection-end-column="2" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/src/store/mutations.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="18" column="6" lean-forward="true" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/src/store/mutation-types.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="12" column="2" lean-forward="true" selection-start-line="12" selection-start-column="2" selection-end-line="12" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/src/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/src/views/CreatedActivity/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="1" column="4" lean-forward="true" selection-start-line="1" selection-start-column="4" selection-end-line="1" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/src/components/HomeMenu/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="1" column="23" selection-start-line="1" selection-start-column="23" selection-end-line="1" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/src/components/HomeSearchList/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="5" column="9" selection-start-line="5" selection-start-column="9" selection-end-line="5" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/src/common/font/font.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="5" column="1" lean-forward="true" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/src/components/Swipe/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="18" column="18" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/src/views/HomeContent/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="e#255#295#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/src/plugin/vant.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="819">
+          <caret line="39" column="13" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/public/index.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="1" column="16" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/src/views/JoinedActivity/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="2" column="11" lean-forward="true" selection-start-line="2" selection-start-column="11" selection-end-line="2" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/src/components/ActivityList/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="546">
+          <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/src/views/HomeSearch/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="15" column="20" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/babel.config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="11" column="2" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/package.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/controllers/hello.js" />
+    <entry file="file://$PROJECT_DIR$/eform/src/App.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="23" column="38" lean-forward="true" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/src/components/ActivityForms/index.vue" />
+    <entry file="file://$PROJECT_DIR$/eform/src/views/ActivityInfo/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="826">
+          <caret line="69" column="59" selection-start-line="69" selection-start-column="59" selection-end-line="69" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/src/components/ActivityForms/TextForm.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="3" column="27" lean-forward="true" selection-start-line="3" selection-start-column="27" selection-end-line="3" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/src/components/ActivityForms/PhoneNumberForm.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="13" column="32" lean-forward="true" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/src/components/ActivityForms/RateForm.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="1" column="32" lean-forward="true" selection-start-line="1" selection-start-column="32" selection-end-line="1" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/src/views/ActivityForm/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="2" column="20" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/src/components/ActivityForms/PasswordForm.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="13" column="16" selection-start-line="13" selection-start-column="16" selection-end-line="13" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/src/components/ActivityForms/NameForm.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="18" column="9" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/src/router.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1008">
+          <caret line="87" column="5" selection-start-line="87" selection-start-column="5" selection-end-line="87" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/src/views/Mine/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="7" column="14" lean-forward="true" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/controllers/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="4" column="64" lean-forward="true" selection-start-line="4" selection-start-column="64" selection-end-line="4" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="672">
+          <caret line="32" column="7" lean-forward="true" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/src/views/About/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="13" selection-start-line="13" selection-end-line="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eform/src/views/Home/index.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="5" column="32" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
