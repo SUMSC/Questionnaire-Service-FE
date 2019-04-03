@@ -6,6 +6,9 @@
 trigger:
 - master
 
+variables:
+  imageName: 'eformfe:$(Build.BuildId)'
+  
 pool:
   vmImage: 'Ubuntu-16.04'
 
@@ -18,5 +21,4 @@ steps:
 - script: |
     cd server
     npm install
-    npm run start
-  displayName: 'npm install and build'
+  displayName: 'npm install'
