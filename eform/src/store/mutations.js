@@ -4,11 +4,18 @@ export default {
     [types.UPDATE_USER_ID] (state, id) {
         state.id = id
     },
-    [types.UPDATE_USER] (state, {id, name, usertype}) {
+    [types.UPDATE_USER] (state, {id, idTag, name, usertype}) {
         console.log(id, name, usertype);
         state.username = name;
         state.id = id;
+        state.idTag = idTag;
         state.userType = usertype === '1' ? '学生' : '老师';
+    },
+    [types.UPDATE_MY_PARTICIPATE] (state, myParticipate) {
+        state.myParticipate = myParticipate;
+    },
+    [types.UPDATE_MY_EVENT] (state, myEvent) {
+        state.myEvent = myEvent;
     },
     [types.SET_ACTIVE_TAB] (state, activeTab) {
         if (state.activeTab === activeTab) return;
@@ -19,5 +26,7 @@ export default {
     },
     [types.CHANGE_PAGE_TYPE] (state, flag) {
         state.mainPage = flag;
-    }
+    },
+
+
 }

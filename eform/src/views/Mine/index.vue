@@ -10,7 +10,7 @@
             <van-cell v-if="id.length !== 0"
                       :title="username"
                       :value="userType"
-                      :label="id"
+                      :label="idTag"
             />
             <van-cell v-else
                       title="请登录"
@@ -38,7 +38,7 @@
         name: "index",
         components: {LoginSheet},
         computed: {
-            ...mapState(['username', 'id', 'userType'])
+            ...mapState(['username', 'id', 'userType', 'idTag'])
         },
         methods: {
             userAction() {
