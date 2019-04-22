@@ -66,7 +66,7 @@ const routes = [
         name: 'joined-activity',
         component: () => import('@/views/JoinedActivity/'),
         meta: {
-            title: '加入的活动',
+            title: '参与的活动',
             main: false
         }
     },

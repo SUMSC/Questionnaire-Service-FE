@@ -1,6 +1,5 @@
 <template>
     <div class="info-page">
-        <Swipe/>
         <h1 class="title">{{title}}</h1>
         <van-row type="flex" justify="center">
             <van-col class="tags" span="16">
@@ -23,7 +22,7 @@
         <van-row type="flex" justify="center">
             <van-col class="time-block" span="20">
                 <p>
-                    <b>报名开始时间：</b>
+                    <b>活动开始时间：</b>
                 </p>
                 <p>
                     <span>{{start_time}}</span>
@@ -34,41 +33,35 @@
                 <p>
                     <span>{{deadline}}</span>
                 </p>
-                <p>
-                    <b>活动开始时间：</b>
-                </p>
-                <p>
-                    <span>{{act_start_time}}</span>
-                </p>
             </van-col>
         </van-row>
 
-        <div class="join-form">
+        <div class="join-event">
             <van-button size="large" type="info" @click="joinActivity">参与活动</van-button>
         </div>
     </div>
 </template>
 
 <script>
-    import Swipe from "@/components/Swipe/";
 
     export default {
         name: "ActivityInfo",
-        components: {Swipe},
         data() {
             return {
                 title: '参观微软苏州',
-                tagList: ['单人项目', '需要提交附件', '报销路费', '测试Tag', '测试Tag', '测试Tag'],
+                tagList: ['创建者：微软学生俱乐部'],
                 detail: '微软“智在未来”实习生计划是为即将毕业的本科、硕士、博士学生量身打造的实习计划旨在帮助在未来一年有全职求职意愿的同学提供了解微软和加入微软（中国及全球）的最佳机会和平台。实习职位涵盖软件开发技术支持等领域。实习生在微软的实习期通常需要达到三个月或以上，形式分全职兼职两种，全职实习生周一至周五工作5天，兼职实习生一周需要保证工作3个工作日以上。我们鼓励同学们在假期进行全职实习，以获得更全面连贯的实习项目经验。',
                 start_time: '2019 年 01 月 01 日 08:00',
-                deadline: '2019 年 01 月 01 日 08:00',
-                act_start_time: '2019 年 01 月 01 日 08:00'
+                deadline: '2019 年 01 月 01 日 08:00'
             }
         },
         methods: {
             joinActivity() {
                 this.$router.push({name: 'activity-form'});
             }
+        },
+        mounted() {
+
         }
     }
 </script>
@@ -76,7 +69,7 @@
 <style scoped>
     .title {
         text-align: center;
-        margin: 1rem;
+        padding: 1rem;
         font-size: 24px;
     }
 
@@ -118,5 +111,12 @@
 
     .time-block p {
         margin-bottom: 0.5rem;
+    }
+
+    .join-event {
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        left: 0;
     }
 </style>
