@@ -20,6 +20,9 @@ export default {
     [types.UPDATE_MY_EVENT] (state, myEvent) {
         state.myEvent = myEvent;
     },
+    [types.UPDATE_CURRENT_FORM] (state, form) {
+        state.currentForm = form;
+    },
     [types.SET_ACTIVE_TAB] (state, activeTab) {
         if (state.activeTab === activeTab) return;
         state.activeTab = activeTab;

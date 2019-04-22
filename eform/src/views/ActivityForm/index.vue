@@ -1,24 +1,139 @@
 <template>
-    <van-cell-group>
-        <NameForm />
-    </van-cell-group>
+    <div class="form-body">
+        <div v-for="(item, index) in currentForm.form">
+            <InputForm
+                    v-if="item.type === 'input'"
+                    :key="index"
+                    v-bind="{...item.data, index}"
+            />
+            <RadioForm
+                    v-if="item.type === 'radio'"
+                    :key="index"
+                    v-bind="{...item.data, index}"
+            />
+            <SelectForm
+                    v-if="item.type === 'select'"
+                    :key="index"
+                    v-bind="{...item.data, index}"
+            />
+            <CheckboxForm
+                    v-if="item.type === 'checkbox'"
+                    :key="index"
+                    v-bind="{...item.data, index}"
+            />
+            <RateForm
+                    v-if="item.type === 'rate'"
+                    :key="index"
+                    v-bind="{...item.data, index}"
+            />
+            <UploadForm
+                    v-if="item.type === 'upload'"
+                    :key="index"
+                    v-bind="{...item.data, index}"
+            />
+        </div>
+        <div class="submit-btn">
+            <van-button size="large" type="info" @click="submit">提交</van-button>
+        </div>
+    </div>
 </template>
 
 <script>
-    import NameForm from "@/components/ActivityForms/NameForm";
+    import {mapState} from "vuex";
+    import InputForm from "../../components/ActivityForms/InputForm";
+    import RadioForm from "../../components/ActivityForms/RadioForm";
+    import SelectForm from "../../components/ActivityForms/SelectForm";
+    import CheckboxForm from "../../components/ActivityForms/CheckboxForm";
+    import RateForm from "../../components/ActivityForms/RateForm";
+    import UploadForm from "../../components/ActivityForms/UploadForm";
+
     export default {
         name: "index",
-        components: {NameForm},
+        components: {UploadForm, RateForm, CheckboxForm, SelectForm, RadioForm, InputForm},
+        computed: {
+            // ...mapState(['currentForm'])
+        },
+        data() {
+            return {
+                currentForm: {
+                    type: 'standard',
+                    form: [
+                        {
+                            type: "input",
+                            data: {
+                                "label": "测试文本题",
+                                "validator": "plain",
+                                "remark": "这是备注"
+                            }
+                        },
+                        {
+                            type: "radio",
+                            data: {
+                                "label": "测试单选题",
+                                "options": ["选项1", "选项2", "选项3"],
+                                "remark": "这是备注"
+                            }
+                        },
+                        {
+                            type: "select",
+                            data: {
+                                "label": "测试下拉题",
+                                "options": ["选项1", "选项2", "选项3", "选项4", "选项5"],
+                                "remark": "这是备注"
+                            }
+                        },
+                        {
+                            type: "checkbox",
+                            data: {
+                                "label": "测试多选题",
+                                "remark": "这是备注",
+                                "options": ["选项1", "选项2", "选项3"],
+                                "maxChoose": 0,
+                                "other": true
+                            }
+                        },
+                        {
+                            "type": "rate",
+                            "data": {
+                                "label": "测试评分题",
+                                "remark": "这是备注",
+                                "count": 5,
+                            }
+                        },
+                        {
+                            "type": "upload",
+                            "data": {
+                                "label": "测试上传",
+                                "remark": "这是备注"
+                            }
+                        }
+                    ]
+                }
+            }
+        },
         mounted() {
             this.$store.dispatch({
                 type: 'getForm',
                 target: 'event',
                 id: this.$route.params.eventId
             });
+        },
+        methods: {
+            submit() {
+
+            }
         }
     }
 </script>
 
 <style scoped>
-
+    .form-body {
+        margin-bottom: 5rem;
+    }
+    .submit-btn {
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+    }
 </style>

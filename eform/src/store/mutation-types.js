@@ -2,6 +2,7 @@ export const UPDATE_USER_ID = 'updateUserID';
 export const UPDATE_USER = 'updateUser';
 export const UPDATE_MY_PARTICIPATE = 'updateMyParticipate';
 export const UPDATE_MY_EVENT = 'updateMyEvent';
+export const UPDATE_CURRENT_FORM = 'updateCurrentForm';
 export const SET_ACTIVE_TAB = 'setActiveTab';
 export const SHOW_LOGIN_SHEET = 'showLoginSheet';
 export const CHANGE_PAGE_TYPE = 'changePageType';

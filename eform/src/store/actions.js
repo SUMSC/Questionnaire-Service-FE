@@ -95,6 +95,7 @@ export default {
             error(err);
         })
     },
+    // 获取需要渲染的表单
     async getForm(context, {target, id}) {
         log(`Get Event Form`);
         const options = {
@@ -107,11 +108,13 @@ export default {
                 headers: {
                     'Authorization': context.state.authToken
                 }
-            };
-            api(options).then(res => {
-                log(res['data']['data']['event']);
-                context.commit(types.UPDATE_CURRENT_FORM, res['data']['data']['event']);
-            })
-        }
+            }
+        };
+        api(options).then(res => {
+            const form = JSON.parse(res['data']['data'][target][0]['form']);
+            log(form);
+            context.commit(types.UPDATE_CURRENT_FORM, form);
+        });
+
     }
 }

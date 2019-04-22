@@ -18,7 +18,14 @@ import {
     NavBar,
     Card,
     Tag,
-    Loading
+    Loading,
+    RadioGroup,
+    Radio,
+    Picker,
+    Checkbox,
+    CheckboxGroup,
+    Rate,
+    Uploader
 } from 'vant';
 
 Vue.use(Search)
@@ -41,4 +48,11 @@ Vue.use(Search)
     .use(Card)
     .use(Tag)
     .use(Loading)
+    .use(RadioGroup)
+    .use(Radio)
+    .use(Picker)
+    .use(Checkbox)
+    .use(CheckboxGroup)
+    .use(Rate)
+    .use(Uploader)
 ;
