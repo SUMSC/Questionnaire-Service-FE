@@ -13,19 +13,21 @@ export default new Vuex.Store({
         search
     },
     state: {
-        // id: '1',
-        // idTag: '1234567890',
-        // username: '测试用户',
-        // userType: '学生',
-        id: '',
-        idTag: '',
-        username: '',
-        userType: '',
+        id: '1',
+        idTag: '1234567890',
+        username: '测试用户',
+        userType: '学生',
+        // id: '',
+        // idTag: '',
+        // username: '',
+        // userType: '',
         activeTab: 0,
         showLoginSheet: false,
         mainPage: true,
         myParticipate: [],
-        myEvent: []
+        myEvent: [],
+        authToken: '',
+        currentForm: {}
     },
     mutations,
     actions

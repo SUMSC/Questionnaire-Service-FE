@@ -1,48 +1,55 @@
 <template>
-    <div class="info-page">
-        <h1 class="title">{{title}}</h1>
-        <van-row type="flex" justify="center">
-            <van-col class="tags" span="16">
-                <van-tag
-                        class="tag"
-                        v-for="(tag, index) in tagList"
-                        type="primary"
-                        size="medium"
-                        :key="index"
-                >
-                    {{tag}}
-                </van-tag>
-            </van-col>
-        </van-row>
-        <van-row type="flex" justify="center">
-            <van-col class="detail" span="20">
-                <p>{{detail}}</p>
-            </van-col>
-        </van-row>
-        <van-row type="flex" justify="center">
-            <van-col class="time-block" span="20">
-                <p>
-                    <b>活动开始时间：</b>
-                </p>
-                <p>
-                    <span>{{start_time}}</span>
-                </p>
-                <p>
-                    <b>报名截止时间：</b>
-                </p>
-                <p>
-                    <span>{{deadline}}</span>
-                </p>
-            </van-col>
-        </van-row>
+    <div class="page">
+        <div class="loading" v-if="loading">
+            <van-loading/>
+        </div>
+        <div class="info-page" v-else>
+            <h1 class="title">{{title}}</h1>
+            <van-row type="flex" justify="center">
+                <van-col class="tags" span="16">
+                    <van-tag
+                            class="tag"
+                            v-for="(tag, index) in tagList"
+                            type="primary"
+                            size="medium"
+                            :key="index"
+                    >
+                        {{tag}}
+                    </van-tag>
+                </van-col>
+            </van-row>
+            <van-row type="flex" justify="center">
+                <van-col class="detail" span="20">
+                    <p>{{detail}}</p>
+                </van-col>
+            </van-row>
+            <van-row type="flex" justify="center">
+                <van-col class="time-block" span="20">
+                    <p>
+                        <b>活动开始时间：</b>
+                    </p>
+                    <p>
+                        <span>{{start_time}}</span>
+                    </p>
+                    <p>
+                        <b>报名截止时间：</b>
+                    </p>
+                    <p>
+                        <span>{{deadline}}</span>
+                    </p>
+                </van-col>
+            </van-row>
 
-        <div class="join-event">
-            <van-button size="large" type="info" @click="joinActivity">参与活动</van-button>
+            <div class="join-event" v-if="active">
+                <van-button size="large" type="info" @click="joinActivity">参与活动</van-button>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+    import {getEventById} from "../../utils/resource";
+    import {log, timeFormat} from "../../utils/lib";
 
     export default {
         name: "ActivityInfo",
@@ -52,16 +59,31 @@
                 tagList: ['创建者：微软学生俱乐部'],
                 detail: '微软“智在未来”实习生计划是为即将毕业的本科、硕士、博士学生量身打造的实习计划旨在帮助在未来一年有全职求职意愿的同学提供了解微软和加入微软（中国及全球）的最佳机会和平台。实习职位涵盖软件开发技术支持等领域。实习生在微软的实习期通常需要达到三个月或以上，形式分全职兼职两种，全职实习生周一至周五工作5天，兼职实习生一周需要保证工作3个工作日以上。我们鼓励同学们在假期进行全职实习，以获得更全面连贯的实习项目经验。',
                 start_time: '2019 年 01 月 01 日 08:00',
-                deadline: '2019 年 01 月 01 日 08:00'
+                deadline: '2019 年 01 月 01 日 08:00',
+                loading: true
             }
         },
         methods: {
             joinActivity() {
-                this.$router.push({name: 'activity-form'});
+                this.$router.push({name: 'activity-form', params: {eventId: this.$route.params.eventId}});
             }
         },
         mounted() {
-
+            this.loading = true;
+            getEventById(
+                this.$route.params.eventId,
+                this.$store.state.authToken,
+                `name detail creator{name} startTime deadline createTime Active`
+            ).then(res => {
+                log(res);
+                this.title = res['name'];
+                this.tagList[0] = `创建者：${res['creator']['name']}`;
+                this.detail = res['detail'];
+                this.start_time = timeFormat(res['startTime']);
+                this.deadline = timeFormat(res['deadline']);
+                this.active = res['Active'];
+                this.loading = false;
+            })
         }
     }
 </script>
@@ -84,7 +106,7 @@
     }
 
     .info-page {
-        background-color: white;
+
     }
 
     .detail {
@@ -118,5 +140,16 @@
         width: 100%;
         bottom: 0;
         left: 0;
+    }
+
+    .loading {
+        display: flex;
+        justify-content:center;
+        margin: 1rem auto 0 auto;
+    }
+
+    .page {
+        height: 100%;
+        background-color: white;
     }
 </style>

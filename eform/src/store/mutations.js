@@ -4,6 +4,9 @@ export default {
     [types.UPDATE_USER_ID] (state, id) {
         state.id = id
     },
+    [types.UPDATE_AUTH_TOKEN] (state, token) {
+        state.authToken = token;
+    },
     [types.UPDATE_USER] (state, {id, idTag, name, usertype}) {
         console.log(id, name, usertype);
         state.username = name;

@@ -17,7 +17,8 @@ import {
     Dialog,
     NavBar,
     Card,
-    Tag
+    Tag,
+    Loading
 } from 'vant';
 
 Vue.use(Search)
@@ -39,4 +40,5 @@ Vue.use(Search)
     .use(NavBar)
     .use(Card)
     .use(Tag)
+    .use(Loading)
 ;

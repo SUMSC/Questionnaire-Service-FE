@@ -3,6 +3,10 @@ mutation ($idTag: ID!, $name: String!) {
     createUser(
         idTag: $idTag, 
         name: $name
-    ) {${content}}
+    ) {
+        ok
+        message
+        user{${content}}
+    }
 }
 `;

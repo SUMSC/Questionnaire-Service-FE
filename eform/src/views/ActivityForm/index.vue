@@ -9,7 +9,13 @@
     export default {
         name: "index",
         components: {NameForm},
-
+        mounted() {
+            this.$store.dispatch({
+                type: 'getForm',
+                target: 'event',
+                id: this.$route.params.eventId
+            });
+        }
     }
 </script>
 

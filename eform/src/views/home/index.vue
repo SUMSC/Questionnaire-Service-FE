@@ -3,7 +3,7 @@
         <form action="/" @submit.prevent class="search-form">
             <van-search
                     v-model="searchText"
-                    placeholder="输入关键字或邀请码"
+                    placeholder="搜索活动、问卷关键字或邀请码"
                     show-action
                     @search="onSearch"
                     @cancel="onCancel"
@@ -27,20 +27,29 @@
                     return this.$store.state.search.searchText;
                 },
                 set(searchText) {
-                    this.$store.commit(types.SEARCH.UPDATE_SEARCH_TEXT, searchText);
+                    this.$store.commit(
+                        'search/' + types.SEARCH.UPDATE_SEARCH_TEXT,
+                        searchText
+                    );
                 }
             }
         },
         methods: {
             onSearch() {
-                this.$store.commit(types.SEARCH.UPDATE_SEARCH_STATUS, false);
+                this.$store.commit(
+                    'search/' + types.SEARCH.UPDATE_SEARCH_STATUS,
+                    false
+                );
             },
             onCancel() {
                 this.$router.push({name: 'home'});
             },
             onFocusSearch() {
                 this.$router.push({name: 'search'});
-                this.$store.commit(types.SEARCH.UPDATE_SEARCH_STATUS, true);
+                this.$store.commit(
+                    'search/' + types.SEARCH.UPDATE_SEARCH_STATUS,
+                    true
+                );
             }
         },
         mounted() {

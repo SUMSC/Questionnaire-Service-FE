@@ -71,6 +71,7 @@ const routes = [
         }
     },
     {
+        path: '/activity-info/:eventId',
         name: 'activity-info',
         component: () => import('@/views/ActivityInfo/'),
         meta: {
@@ -79,6 +80,7 @@ const routes = [
         }
     },
     {
+        path: '/activity-form/:eventId',
         name: 'activity-form',
         component: () => import('@/views/ActivityForm/'),
         meta: {

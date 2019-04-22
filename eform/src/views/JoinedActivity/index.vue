@@ -5,7 +5,7 @@
                 class="list-item"
                 :desc="item.event.detail"
                 :title="item.event.name"
-                @click="clickItem"
+                @click="clickItem(item.event.id)"
                 :key="item.id"
         />
     </div>
@@ -13,6 +13,7 @@
 
 <script>
     import {mapState} from "vuex";
+    import {log} from "../../utils/lib";
 
     export default {
         name: "JoinedActivity",
@@ -24,8 +25,9 @@
             this.$store.dispatch('getMyParticipate');
         },
         methods: {
-            clickItem() {
-                this.$router.push({name: 'activity-info'})
+            clickItem(id) {
+                log(id);
+                this.$router.push({name: 'activity-info', params: {eventId: id}})
             }
         }
     }

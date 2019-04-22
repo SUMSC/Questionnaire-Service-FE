@@ -5,7 +5,7 @@
                 class="list-item"
                 :desc="item.detail"
                 :title="item.name"
-                @click="clickItem"
+                @click="clickItem(item.id)"
                 :key="item.id"
         />
     </div>
@@ -13,6 +13,7 @@
 
 <script>
     import {mapState} from "vuex";
+    import {log} from "@/utils/lib";
 
     export default {
         name: "CreatedActivity",
@@ -20,12 +21,13 @@
             ...mapState(['id', 'myEvent'])
         },
         mounted() {
-            console.log('Mount Get My Created Event');
+            log('Mount Get My Created Event');
             this.$store.dispatch('getMyEvent');
         },
         methods: {
-            clickItem() {
-                this.$router.push({name: 'activity-info'})
+            clickItem(id) {
+                log(id);
+                this.$router.push({name: 'activity-info', params: {eventId: id}})
             }
         }
     }
