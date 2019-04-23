@@ -17,6 +17,9 @@
 
 <script>
     // TODO: 添加【其他】选项的支持
+    import {log} from "../../utils/lib";
+    import * as types from "../../store/mutation-types";
+
     export default {
         name: "CheckboxForm",
         data() {
@@ -24,11 +27,27 @@
                 answer: []
             }
         },
+        watch: {
+            answer(to, from) {
+                this.$store.commit({
+                    type: types.UPDATE_CURRENT_ANSWER,
+                    index: this.index,
+                    answer: to
+                })
+            }
+        },
         props: ['required', 'label', 'remark', 'index', 'options', 'maxChoose', 'other'],
         methods: {
             toggle(index) {
                 this.$refs.checkboxes[index].toggle();
             }
+        },
+        mounted() {
+            this.$store.commit({
+                type: types.UPDATE_CURRENT_ANSWER,
+                index: this.index,
+                answer: []
+            })
         }
     }
 </script>

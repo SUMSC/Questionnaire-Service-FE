@@ -15,14 +15,33 @@
 </template>
 
 <script>
+    import {log} from "../../utils/lib";
+    import * as types from "../../store/mutation-types";
+
     export default {
         name: "RadioForm",
         data() {
             return {
-                answer: 1
+                answer: ""
             }
         },
-        props: ['required', 'label', 'remark', 'index', 'options']
+        watch: {
+            answer(to, from) {
+                this.$store.commit({
+                    type: types.UPDATE_CURRENT_ANSWER,
+                    index: this.index,
+                    answer: to
+                })
+            }
+        },
+        props: ['required', 'label', 'remark', 'index', 'options'],
+        mounted() {
+            this.$store.commit({
+                type: types.UPDATE_CURRENT_ANSWER,
+                index: this.index,
+                answer: ""
+            })
+        }
     }
 </script>
 

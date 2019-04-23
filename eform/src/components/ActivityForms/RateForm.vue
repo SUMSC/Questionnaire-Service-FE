@@ -6,14 +6,33 @@
 </template>
 
 <script>
+    import {log} from "../../utils/lib";
+    import * as types from "../../store/mutation-types";
+
     export default {
         name: "RateForm",
         data() {
             return {
-                answer: 1
+                answer: 5
             }
         },
-        props: ['required', 'label', 'remark', 'index', 'count']
+        watch: {
+            answer(to, from) {
+                this.$store.commit({
+                    type: types.UPDATE_CURRENT_ANSWER,
+                    index: this.index,
+                    answer: to
+                })
+            }
+        },
+        props: ['required', 'label', 'remark', 'index', 'count'],
+        mounted() {
+            this.$store.commit({
+                type: types.UPDATE_CURRENT_ANSWER,
+                index: this.index,
+                answer: this.count
+            })
+        }
     }
 </script>
 

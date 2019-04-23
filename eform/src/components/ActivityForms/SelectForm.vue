@@ -4,23 +4,33 @@
         <van-picker
                 :columns="options"
                 @change="onChange"
+                :default-index="1"
         />
     </van-cell-group>
 </template>
 
 <script>
+    import {log} from "../../utils/lib";
+    import * as types from "../../store/mutation-types";
+
     export default {
         name: "SelectForm",
-        data() {
-            return {
-                answer: ""
-            }
-        },
         props: ['required', 'label', 'remark', 'index', 'options'],
         methods: {
             onChange(picker, value, index) {
-
+                this.$store.commit({
+                    type: types.UPDATE_CURRENT_ANSWER,
+                    index: this.index,
+                    answer: value
+                })
             }
+        },
+        mounted() {
+            this.$store.commit({
+                type: types.UPDATE_CURRENT_ANSWER,
+                index: this.index,
+                answer: this.options[0]
+            })
         }
     }
 </script>

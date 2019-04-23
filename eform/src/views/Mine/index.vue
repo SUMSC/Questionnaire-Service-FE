@@ -24,7 +24,8 @@
             <van-cell title="创建的活动" is-link :to="{name: 'created-activity'}"/>
         </van-cell-group>
         <van-cell-group title="其他">
-            <van-cell title="关于我们" is-link :to="{name: 'about'}"/>
+            <van-cell title="关于我们" is-link :to="{name: 'about'}" />
+            <van-cell title="反馈意见" is-link :to="{name: 'feedback'}" />
         </van-cell-group>
     </div>
 </template>

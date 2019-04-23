@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import actions from "./actions";
+import actions from "./actions"
 import mutations from "./mutations"
 import notice from "./modules/notice"
 import search from "./modules/search"
@@ -27,7 +27,11 @@ export default new Vuex.Store({
         myParticipate: [],
         myEvent: [],
         authToken: '',
-        currentForm: {}
+        currentForm: {},
+        currentAnswer: {
+            "type": "answer",
+            "form": {}
+        }
     },
     mutations,
     actions

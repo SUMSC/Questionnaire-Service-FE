@@ -25,7 +25,8 @@ import {
     Checkbox,
     CheckboxGroup,
     Rate,
-    Uploader
+    Uploader,
+    Popup
 } from 'vant';
 
 Vue.use(Search)
@@ -55,4 +56,5 @@ Vue.use(Search)
     .use(CheckboxGroup)
     .use(Rate)
     .use(Uploader)
+    .use(Popup)
 ;
