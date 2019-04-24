@@ -30,6 +30,10 @@
             goBack() {
                 this.$router.go(-1);
             }
+        },
+        mounted() {
+            // this.$store.dispatch('getMyEvent');
+            this.$store.dispatch('getMyParticipate');
         }
     }
 </script>

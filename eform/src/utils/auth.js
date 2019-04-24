@@ -18,13 +18,13 @@ export const verify = token => {
     return true;
 };
 
-export const userLogin = (id, token) => {
+export const userLogin = (id, password) => {
     const options = {
         method: 'GET',
         url: `${AUTH_URL}/login/`,
         params: {
             id,
-            token
+            token: hashSeed(password, 'md5')
         },
         responseType: 'json'
     };

@@ -24,7 +24,7 @@
         name: "CheckboxForm",
         data() {
             return {
-                answer: []
+                answer: this._answer || [],
             }
         },
         watch: {
@@ -36,7 +36,7 @@
                 })
             }
         },
-        props: ['required', 'label', 'remark', 'index', 'options', 'maxChoose', 'other'],
+        props: ['required', '_answer', 'label', 'remark', 'index', 'options', 'maxChoose', 'other'],
         methods: {
             toggle(index) {
                 this.$refs.checkboxes[index].toggle();

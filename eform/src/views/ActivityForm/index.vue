@@ -15,7 +15,7 @@
                 </b></span>
             </p>
         </van-popup>
-        <div v-for="(item, index) in currentForm.form">
+        <div v-for="(item, index) in currentForm">
             <PlainForm
                     v-if="item.type === 'plain'"
                     :key="index"
@@ -73,13 +73,18 @@
         name: "index",
         components: {PlainForm, UploadForm, RateForm, CheckboxForm, SelectForm, RadioForm, InputForm},
         computed: {
-            // ...mapState(['currentForm'])
+            // currentForm() {
+            //     let form = this.$store.state.currentForm;
+            //     let answer = this.$store.state.currentAnswer;
+            //     for (let i in answer) {
+            //         form[i]['answer'] = answer[i];
+            //     }
+            //     return form;
+            // }
         },
         data() {
             return {
-                currentForm: {
-                    type: 'standard',
-                    form: [
+                currentForm: [
                         {
                             type: "plain",
                             data: {
@@ -93,7 +98,8 @@
                                 "label": "测试文本题",
                                 "validator": "email",
                                 "remark": "这是备注",
-                                "required": true
+                                "required": true,
+                                "_answer": "测试答案"
                             }
                         },
                         {
@@ -102,7 +108,8 @@
                                 "label": "测试单选题",
                                 "options": ["选项1", "选项2", "选项3"],
                                 "remark": "这是备注",
-                                "required": true
+                                "required": true,
+                                "_answer": "选项2"
                             }
                         },
                         {
@@ -111,7 +118,8 @@
                                 "label": "测试下拉题",
                                 "options": ["选项1", "选项2", "选项3", "选项4", "选项5"],
                                 "remark": "这是备注",
-                                "required": true
+                                "required": true,
+                                "_answer": 2
                             }
                         },
                         {
@@ -122,7 +130,8 @@
                                 "options": ["选项1", "选项2", "选项3"],
                                 "maxChoose": 0,
                                 "other": true,
-                                "required": true
+                                "required": true,
+                                "_answer": ["选项1", "选项2"]
                             }
                         },
                         {
@@ -131,7 +140,8 @@
                                 "label": "测试评分题",
                                 "remark": "这是备注",
                                 "count": 5,
-                                "required": true
+                                "required": true,
+                                "_answer": 1
                             }
                         },
                         {
@@ -142,25 +152,32 @@
                                 "required": true
                             }
                         }
-                    ]
-                },
+                    ],
                 showWarn: false
             }
         },
+        props: ['target', 'id', 'op'],
         mounted() {
+            log(this.$route.query);
             this.$store.dispatch({
                 type: 'getForm',
-                target: 'event',
-                id: this.$route.params.eventId
+                target: this.target,
+                id: this.id
             });
+            this.$store.dispatch({
+                type: 'initAnswer',
+                target: this.target,
+                op: this.op,
+                id: this.id
+            })
         },
         methods: {
             submit() {
-                const answer = this.$store.state.currentAnswer.form;
+                const answer = this.$store.state.currentAnswer;
                 log(answer);
                 let sth_null = false;
                 for (let i in answer) {
-                    const formItem = this.currentForm.form[i];
+                    const formItem = this.currentForm[i];
                     if (formItem.data.required) {
                         if (formItem.type === 'input' ||
                             formItem.type === 'radio' ||

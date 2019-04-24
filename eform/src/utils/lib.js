@@ -1,8 +1,8 @@
 import dayjs from 'dayjs';
 
-export const logger = level => message => {
+export const logger = level => (...message) => {
     console[level](
-        `${dayjs().format('YYYY-MM-DD HH:mm:ss').toString()}`, message
+        `${dayjs().format('YYYY-MM-DD HH:mm:ss').toString()}`, ...message
     );
 };
 

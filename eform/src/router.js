@@ -80,9 +80,10 @@ const routes = [
         }
     },
     {
-        path: '/activity-form/:eventId',
+        path: '/activity-form',
         name: 'activity-form',
         component: () => import('@/views/ActivityForm/'),
+        props: route => route.query,
         meta: {
             title: '报名表',
             main: false

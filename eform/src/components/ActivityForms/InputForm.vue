@@ -23,7 +23,7 @@
         name: "InputForm",
         data() {
             return {
-                answer: "",
+                answer: this._answer || "",
                 error:
                     this.validator === "email" ? "邮箱格式错误" :
                     this.require? "请填写你的答案": ""
@@ -38,7 +38,7 @@
                 })
             }
         },
-        props: ['required', 'label', 'remark', 'index', 'validator'],
+        props: ['required', '_answer', 'label', 'remark', 'index', 'validator'],
         mounted() {
             this.$store.commit({
                 type: types.UPDATE_CURRENT_ANSWER,

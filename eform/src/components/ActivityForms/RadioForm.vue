@@ -22,7 +22,7 @@
         name: "RadioForm",
         data() {
             return {
-                answer: ""
+                answer: this._answer || "",
             }
         },
         watch: {
@@ -34,7 +34,7 @@
                 })
             }
         },
-        props: ['required', 'label', 'remark', 'index', 'options'],
+        props: ['required', '_answer', 'label', 'remark', 'index', 'options'],
         mounted() {
             this.$store.commit({
                 type: types.UPDATE_CURRENT_ANSWER,

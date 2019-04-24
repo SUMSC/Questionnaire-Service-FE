@@ -41,7 +41,18 @@
             </van-row>
 
             <div class="join-event" v-if="active">
-                <van-button size="large" type="info" @click="joinActivity">参与活动</van-button>
+                <van-button
+                        v-if="relation === 'stranger'"
+                        size="large"
+                        type="info"
+                        @click="joinActivity"
+                >参与活动</van-button>
+                <van-button
+                        v-else-if="relation === 'participant'"
+                        size="large"
+                        type="info"
+                        @click="editAnswer"
+                >修改我的报名表</van-button>
             </div>
         </div>
     </div>
@@ -53,6 +64,23 @@
 
     export default {
         name: "ActivityInfo",
+        computed: {
+            // 判断与当前活动有什么关系
+            relation() {
+                const owner = this.$store.state.myEvent.filter(
+                    item => item.id === this.$route.params.eventId
+                ).length !== 0;
+                const participant = this.$store.state.myParticipate.filter(
+                    item => item.event.id === this.$route.params.eventId
+                ).length !== 0;
+                if (owner) {
+                    return 'owner';
+                } else if (participant){
+                    return 'participant';
+                } else
+                    return 'stranger';
+            }
+        },
         data() {
             return {
                 title: '参观微软苏州',
@@ -65,7 +93,18 @@
         },
         methods: {
             joinActivity() {
-                this.$router.push({name: 'activity-form', params: {eventId: this.$route.params.eventId}});
+                this.$router.push({name: 'activity-form', query: {
+                    id: this.$route.params.eventId,
+                    op: 'init',
+                    target: 'event'
+                }});
+            },
+            editAnswer() {
+                this.$router.push({name: 'activity-form', query: {
+                    id: this.$route.params.eventId,
+                    op: 'edit',
+                    target: 'event'
+                }});
             }
         },
         mounted() {
@@ -83,7 +122,8 @@
                 this.deadline = timeFormat(res['deadline']);
                 this.active = res['Active'];
                 this.loading = false;
-            })
+            });
+            log(this.relation);
         }
     }
 </script>

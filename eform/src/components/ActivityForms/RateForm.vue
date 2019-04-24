@@ -13,7 +13,7 @@
         name: "RateForm",
         data() {
             return {
-                answer: 5
+                answer: this._answer || 5,
             }
         },
         watch: {
@@ -25,7 +25,7 @@
                 })
             }
         },
-        props: ['required', 'label', 'remark', 'index', 'count'],
+        props: ['required', '_answer', 'label', 'remark', 'index', 'count'],
         mounted() {
             this.$store.commit({
                 type: types.UPDATE_CURRENT_ANSWER,

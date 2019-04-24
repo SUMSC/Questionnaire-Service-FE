@@ -1,7 +1,7 @@
 export const participate = content => {
     return `
-query ($userId: Int, $eventId: Int){
-  participate(userId: $userId, eventId: $eventId) {
+query ($userId: Int, $id: Int){
+  participate(userId: $userId, eventId: $id) {
     ${content}
   }
 }

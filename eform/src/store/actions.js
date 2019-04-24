@@ -4,7 +4,7 @@ import * as types from "./mutation-types";
 import * as queries from "../utils/queries";
 import * as mutations from "../utils/db_mutations";
 import * as auth from "../utils/auth";
-import {api, search_api} from "../utils/resource";
+import {api} from "../utils/resource";
 import {log, debug, warn, error} from "../utils/lib";
 
 
@@ -12,7 +12,7 @@ export default {
     async login(context, {id, password}) {
         log("User Login");
         // 获取 JSON Web Token
-        const webToken = await auth.userLogin(id, hashSeed(password, 'md5'))['data'];
+        const webToken = await auth.userLogin(id, password)['data'];
         if (webToken['ok'] && auth.verify(webToken['message'])) {
             context.commit(types.UPDATE_AUTH_TOKEN, webToken['message']);
             const userData = jwt.decode(webToken['message']);
@@ -30,17 +30,27 @@ export default {
                 // 失败则获取已存在的用户 ID
                 res = await api({
                     data: {
-                        query: queries.user(`id idTag name`),
+                        query: queries.user(
+                            `
+                            id idTag name
+                            myEvent {id name detail Active}
+                            myParticipation {event {id name detail Active}}
+                            `
+                        ),
                         variables: {idTag: userData['id']}
                     }
                 })['data']['data'];
                 if (res['user'].length !== 0) {
                     log(`Create Failed, Update User: ${res['user'][0]['name']}`);
                     context.commit(types.UPDATE_USER, {...res['user'][0], usertype: userData['userType']});
+                    context.commit(types.UPDATE_MY_PARTICIPATE, res['user'][0]['myParticipation']);
+                    context.commit(types.UPDATE_MY_EVENT, res['user'][0]['myEvent']);
                 } else {
                     warn(`No Such User, Login Failed`);
+                    return;
                 }
             }
+
         } else {
             warn("Login Failed");
             // 登录失败
@@ -56,7 +66,7 @@ export default {
                     `event {id name detail Active}`
                 ),
                 variables: {
-                    id: context.state.id
+                    userId: context.state.id
                 }
             },
             responseType: 'json',
@@ -65,10 +75,10 @@ export default {
             }
         };
         api(options).then(res => {
-            log(res['data']['data']['participate']);
+            log('MyParticipate', res['data']['data']['participate']);
             context.commit(types.UPDATE_MY_PARTICIPATE, res['data']['data']['participate']);
         }).catch(err => {
-            error(err);
+            error('[MyParticipate]', err);
         });
     },
     // 获取我创建的活动
@@ -89,10 +99,10 @@ export default {
             }
         };
         api(options).then(res => {
-            log(res['data']['data']['event']);
+            log('MyEvent', res['data']['data']['event']);
             context.commit(types.UPDATE_MY_EVENT, res['data']['data']['event']);
         }).catch(err => {
-            error(err);
+            error('MyEvent Error', err);
         })
     },
     // 获取需要渲染的表单
@@ -110,11 +120,41 @@ export default {
                 }
             }
         };
-        api(options).then(res => {
+        await api(options).then(res => {
             const form = JSON.parse(res['data']['data'][target][0]['form']);
             log(form);
             context.commit(types.UPDATE_CURRENT_FORM, form);
         });
-
+    },
+    async initAnswer(context, {target, op, id}) {
+        log(`Init Form & Answer`);
+        if (op === 'init') {
+            context.commit({
+                type: types.INIT_ANSWER,
+                form: {}
+            });
+        } else if (op === 'edit') {
+            target =
+                target === 'event' ? 'participate' :
+                target === 'qnaire' ? 'answer':
+                target === 'anonymousQnaire' ? 'anonymousAnswer': "";
+            const options = {
+                data: {
+                    query: queries[target](`answer`),
+                    variables: {
+                        userId: context.state.id,
+                        id: id
+                    }
+                }
+            };
+            api(options).then((res => {
+                res = res['data']['data'];
+                log("GET My Answer", res);
+                context.commit({
+                    type: types.INIT_ANSWER,
+                    form: JSON.parse(res['participate'][0]['answer'])
+                });
+            }))
+        }
     }
 }

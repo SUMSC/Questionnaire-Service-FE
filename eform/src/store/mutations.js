@@ -28,14 +28,11 @@ export default {
     },
     // 更新当前页面需要显示的答案
     [types.UPDATE_CURRENT_ANSWER] (state, {index, answer}) {
-        state.currentAnswer.form[index] = answer;
+        state.currentAnswer[index] = answer;
     },
     // 初始化答案
-    [types.INIT_ANSWER] (state) {
-        state.currentAnswer = {
-            "type": "answer",
-            "form": {}
-        }
+    [types.INIT_ANSWER] (state, {form}) {
+        state.currentAnswer = form;
     },
     // 更新当前页面需要显示的表单
     [types.UPDATE_CURRENT_FORM] (state, form) {
