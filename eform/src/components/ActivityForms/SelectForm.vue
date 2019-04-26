@@ -4,7 +4,7 @@
         <van-picker
                 :columns="options"
                 @change="onChange"
-                :default-index="_answer || 1"
+                :default-index="answer"
         />
     </van-cell-group>
 </template>
@@ -16,6 +16,12 @@
     export default {
         name: "SelectForm",
         props: ['required', '_answer', 'label', 'remark', 'index', 'options'],
+        computed: {
+            answer() {
+                if (this.options.indexOf(this._answer) === -1) return 1;
+                return this.options.indexOf(this._answer);
+            }
+        },
         methods: {
             onChange(picker, value, index) {
                 this.$store.commit({
@@ -25,7 +31,7 @@
                 })
             }
         },
-        mounted() {
+        created() {
             this.$store.commit({
                 type: types.UPDATE_CURRENT_ANSWER,
                 index: this.index,

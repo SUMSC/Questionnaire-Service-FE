@@ -33,7 +33,7 @@
         },
         mounted() {
             // this.$store.dispatch('getMyEvent');
-            this.$store.dispatch('getMyParticipate');
+            // this.$store.dispatch('getMyParticipate');
         }
     }
 </script>

@@ -1,26 +1,62 @@
 import axios from "axios";
 import {hashSeed} from "./auth";
 import * as queries from "./queries";
+import store from "../store";
+import {log, warn} from "./lib";
 
-const RESOURCE_URL = `http://localhost:8000`;
+const RESOURCE_URL = `http://localhost:8000/api/`;
 
-export const api = axios.create({
+const api = axios.create({
     baseURL: RESOURCE_URL,
-    method: 'POST'
+    responseType: 'json',
+    timeout: 5000
 });
 
-export const getEventById = (id, token, content) => {
-    const options = {
-        data: {
-            query: queries.event(content),
-            variables: {id}
-        },
-        responseType: 'json',
-        headers: {
-            'Authorization': token
-        }
-    };
-    return api(options).then(res => res['data']['data']['event'][0]);
+api.interceptors.request.use(config => {
+    if (store.state.authToken) {
+        config.headers['Authorization'] = store.state.authToken;
+    }
+    return config;
+}, err => {
+    log(err);
+    Promise.reject(err);
+});
+
+// api.interceptors.response.use(response => response, error => {
+//     warn('err' + error);
+//     return Promise.reject(error);
+// });
+
+export const update_api = (model, data) => {
+    return api({
+        url: model,
+        method: 'PUT',
+        data
+    }).then(res => res['data']);
+};
+
+export const delete_api = (model, data) => {
+    return api({
+        url: model,
+        method: 'DELETE',
+        data
+    }).then(res => res['data']);
+};
+
+export const insert_api = (model, data) => {
+    return api({
+        url: model,
+        method: 'POST',
+        data
+    }).then(res => res['data']);
+};
+
+export const select_api = (model, data) => {
+    return api({
+        url: model,
+        method: 'GET',
+        params: data
+    }).then(res => res['data']);
 };
 
 const SEARCH_URL = `http://192.168.2.101:9200`;

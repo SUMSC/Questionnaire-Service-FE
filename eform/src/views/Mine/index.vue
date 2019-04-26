@@ -22,6 +22,8 @@
         <van-cell-group title="活动">
             <van-cell title="参与的活动" is-link :to="{name: 'joined-activity'}"/>
             <van-cell title="创建的活动" is-link :to="{name: 'created-activity'}"/>
+            <van-cell title="发布的问卷" is-link :to="{name: 'my-qnaire'}" />
+            <van-cell title="提交的回答" is-link :to="{name: 'my-answer'}" />
         </van-cell-group>
         <van-cell-group title="其他">
             <van-cell title="关于我们" is-link :to="{name: 'about'}" />

@@ -18,28 +18,31 @@
     import * as types from "../../store/mutation-types";
     import {requiredIf, email, numeric} from "vuelidate/lib/validators";
 
-
     export default {
         name: "InputForm",
-        data() {
-            return {
-                answer: this._answer || "",
-                error:
-                    this.validator === "email" ? "邮箱格式错误" :
-                    this.require? "请填写你的答案": ""
+        computed: {
+            answer: {
+                get: function() {
+                    return this._answer || "";
+                },
+                set: function(answer) {
+                    this.$store.commit({
+                        type: types.UPDATE_CURRENT_ANSWER,
+                        index: this.index,
+                        answer: answer
+                    })
+                }
             }
         },
-        watch: {
-            answer(to, from) {
-                this.$store.commit({
-                    type: types.UPDATE_CURRENT_ANSWER,
-                    index: this.index,
-                    answer: to
-                })
+        data() {
+            return {
+                error:
+                    this.validator === "email" ? "邮箱格式错误" :
+                        this.require ? "请填写你的答案" : ""
             }
         },
         props: ['required', '_answer', 'label', 'remark', 'index', 'validator'],
-        mounted() {
+        created() {
             this.$store.commit({
                 type: types.UPDATE_CURRENT_ANSWER,
                 index: this.index,
@@ -49,7 +52,7 @@
         validations() {
             return {
                 answer: {
-                    email: this.validator === 'email'? email: null
+                    email: this.validator === 'email' ? email : null
                 }
             }
         }

@@ -83,12 +83,12 @@
         },
         data() {
             return {
-                title: '参观微软苏州',
-                tagList: ['创建者：微软学生俱乐部'],
-                detail: '微软“智在未来”实习生计划是为即将毕业的本科、硕士、博士学生量身打造的实习计划旨在帮助在未来一年有全职求职意愿的同学提供了解微软和加入微软（中国及全球）的最佳机会和平台。实习职位涵盖软件开发技术支持等领域。实习生在微软的实习期通常需要达到三个月或以上，形式分全职兼职两种，全职实习生周一至周五工作5天，兼职实习生一周需要保证工作3个工作日以上。我们鼓励同学们在假期进行全职实习，以获得更全面连贯的实习项目经验。',
-                start_time: '2019 年 01 月 01 日 08:00',
-                deadline: '2019 年 01 月 01 日 08:00',
-                loading: true
+                title: this.data['name'],
+                tagList: [`创建者：${this.data['creator']['name']}`],
+                detail: this.data['detail'],
+                start_time: timeFormat(this.data['start_time']),
+                deadline: timeFormat(this.data['deadline']),
+                active: this.data['_active']
             }
         },
         methods: {
@@ -107,24 +107,7 @@
                 }});
             }
         },
-        mounted() {
-            this.loading = true;
-            getEventById(
-                this.$route.params.eventId,
-                this.$store.state.authToken,
-                `name detail creator{name} startTime deadline createTime Active`
-            ).then(res => {
-                log(res);
-                this.title = res['name'];
-                this.tagList[0] = `创建者：${res['creator']['name']}`;
-                this.detail = res['detail'];
-                this.start_time = timeFormat(res['startTime']);
-                this.deadline = timeFormat(res['deadline']);
-                this.active = res['Active'];
-                this.loading = false;
-            });
-            log(this.relation);
-        }
+        props: ['data'],
     }
 </script>
 

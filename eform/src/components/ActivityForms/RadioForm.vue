@@ -20,22 +20,22 @@
 
     export default {
         name: "RadioForm",
-        data() {
-            return {
-                answer: this._answer || "",
-            }
-        },
-        watch: {
-            answer(to, from) {
-                this.$store.commit({
-                    type: types.UPDATE_CURRENT_ANSWER,
-                    index: this.index,
-                    answer: to
-                })
+        computed: {
+            answer: {
+                get: function() {
+                    return this._answer || "";
+                },
+                set: function(answer) {
+                    this.$store.commit({
+                        type: types.UPDATE_CURRENT_ANSWER,
+                        index: this.index,
+                        answer: answer
+                    })
+                }
             }
         },
         props: ['required', '_answer', 'label', 'remark', 'index', 'options'],
-        mounted() {
+        created() {
             this.$store.commit({
                 type: types.UPDATE_CURRENT_ANSWER,
                 index: this.index,

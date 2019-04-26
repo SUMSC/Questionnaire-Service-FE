@@ -20,14 +20,13 @@
         computed: {
             ...mapState(['id', 'myParticipate'])
         },
-        mounted() {
-            console.log('Mount Get My Participate');
+        beforeCreate() {
             this.$store.dispatch('getMyParticipate');
         },
         methods: {
             clickItem(id) {
-                log(id);
-                this.$router.push({name: 'activity-info', params: {eventId: id}})
+                const event = this.myParticipate.filter(item => item.event.id === id)[0].event;
+                this.$router.push({name: 'activity-info', params: {event}})
             }
         }
     }

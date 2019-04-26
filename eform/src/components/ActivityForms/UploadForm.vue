@@ -46,7 +46,7 @@
                 }
             }
         },
-        mounted() {
+        created() {
             this.$store.commit({
                 type: types.UPDATE_CURRENT_ANSWER,
                 index: this.index,

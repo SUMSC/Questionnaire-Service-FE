@@ -1,7 +1,12 @@
 export const UPDATE_USER_ID = 'updateUserID';
 export const UPDATE_USER = 'updateUser';
-export const UPDATE_MY_PARTICIPATE = 'updateMyParticipate';
+
 export const UPDATE_MY_EVENT = 'updateMyEvent';
+export const UPDATE_MY_PARTICIPATE = 'updateMyParticipate';
+export const UPDATE_MY_QNAIRE = 'updateMyQnaire';
+export const UPDATE_MY_ANSWER = 'updateMyAnswer';
+export const UPDATE_MY_ANONYMOUS_QNAIRE = 'updateMyAnonymousQnaire';
+
 export const UPDATE_CURRENT_FORM = 'updateCurrentForm';
 export const UPDATE_CURRENT_ANSWER = 'updateCurrentAnswer';
 export const INIT_ANSWER = 'initAnswer';

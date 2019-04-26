@@ -10,3 +10,19 @@ mutation ($idTag: ID!, $name: String!) {
     }
 }
 `;
+
+export const participate = op => content => `
+mutation ($userId: Int!, $id: Int!, $answer: JSONString!){
+    ${op === 'init' ? 'joinEvent' : 'updateParticipate'}(
+        eventId: $id,
+        userId: $userId,
+        answer: $answer
+    ) {
+        ok
+        message
+        participate {
+            ${content}
+        }
+    }
+}
+`;

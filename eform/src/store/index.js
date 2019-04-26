@@ -13,19 +13,22 @@ export default new Vuex.Store({
         search
     },
     state: {
-        // id: '', // 用户 ID
-        // idTag: '', // 用户学号
-        // username: '', // 用户名
-        // userType: '', // 用户类型
-        id: '1', // 用户 ID
-        idTag: '123456', // 用户学号
-        username: '测试用户', // 用户名
-        userType: '学生', // 用户类型："学生"，"老师", "匿名用户"
+        id: '', // 用户 ID
+        idTag: '', // 用户学号
+        username: '', // 用户名
+        userType: '', // 用户类型
+        // id: '1', // 用户 ID
+        // idTag: '1627406048', // 用户学号
+        // username: '王子恒', // 用户名
+        // userType: '学生', // 用户类型："学生"，"老师", "匿名用户"
         activeTab: 0,
         showLoginSheet: false,
         mainPage: true,
-        myParticipate: [],
         myEvent: [],
+        myParticipate: [],
+        myQnaire: [],
+        myAnswer: [],
+        myAnonymousQnaire: [],
         authToken: '',
         currentForm: [],
         currentAnswer: {}

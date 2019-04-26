@@ -20,7 +20,7 @@ export const verify = token => {
 
 export const userLogin = (id, password) => {
     const options = {
-        method: 'GET',
+        method: 'POST',
         url: `${AUTH_URL}/login/`,
         params: {
             id,

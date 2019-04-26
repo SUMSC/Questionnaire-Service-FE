@@ -68,97 +68,28 @@
     import UploadForm from "../../components/ActivityForms/UploadForm";
     import PlainForm from "../../components/ActivityForms/PlainForm";
     import {log} from "../../utils/lib";
+    import Vue from 'vue'
 
     export default {
         name: "index",
         components: {PlainForm, UploadForm, RateForm, CheckboxForm, SelectForm, RadioForm, InputForm},
         computed: {
-            // currentForm() {
-            //     let form = this.$store.state.currentForm;
-            //     let answer = this.$store.state.currentAnswer;
-            //     for (let i in answer) {
-            //         form[i]['answer'] = answer[i];
-            //     }
-            //     return form;
-            // }
+            currentForm() {
+                let form = this.$store.state.currentForm;
+                let answer = this.$store.state.currentAnswer;
+                for (let i in answer) {
+                    Vue.set(form[i]['data'], '_answer', answer[i]);
+                }
+                return form;
+            },
         },
         data() {
             return {
-                currentForm: [
-                        {
-                            type: "plain",
-                            data: {
-                                "label": "测试文本描述",
-                                "remark": "这是备注"
-                            }
-                        },
-                        {
-                            type: "input",
-                            data: {
-                                "label": "测试文本题",
-                                "validator": "email",
-                                "remark": "这是备注",
-                                "required": true,
-                                "_answer": "测试答案"
-                            }
-                        },
-                        {
-                            type: "radio",
-                            data: {
-                                "label": "测试单选题",
-                                "options": ["选项1", "选项2", "选项3"],
-                                "remark": "这是备注",
-                                "required": true,
-                                "_answer": "选项2"
-                            }
-                        },
-                        {
-                            type: "select",
-                            data: {
-                                "label": "测试下拉题",
-                                "options": ["选项1", "选项2", "选项3", "选项4", "选项5"],
-                                "remark": "这是备注",
-                                "required": true,
-                                "_answer": 2
-                            }
-                        },
-                        {
-                            type: "checkbox",
-                            data: {
-                                "label": "测试多选题",
-                                "remark": "这是备注",
-                                "options": ["选项1", "选项2", "选项3"],
-                                "maxChoose": 0,
-                                "other": true,
-                                "required": true,
-                                "_answer": ["选项1", "选项2"]
-                            }
-                        },
-                        {
-                            "type": "rate",
-                            "data": {
-                                "label": "测试评分题",
-                                "remark": "这是备注",
-                                "count": 5,
-                                "required": true,
-                                "_answer": 1
-                            }
-                        },
-                        {
-                            "type": "upload",
-                            "data": {
-                                "label": "测试上传",
-                                "remark": "这是备注",
-                                "required": true
-                            }
-                        }
-                    ],
                 showWarn: false
             }
         },
         props: ['target', 'id', 'op'],
         mounted() {
-            log(this.$route.query);
             this.$store.dispatch({
                 type: 'getForm',
                 target: this.target,
@@ -174,8 +105,9 @@
         methods: {
             submit() {
                 const answer = this.$store.state.currentAnswer;
-                log(answer);
                 let sth_null = false;
+                log(this.currentForm);
+                log(answer);
                 for (let i in answer) {
                     const formItem = this.currentForm[i];
                     if (formItem.data.required) {
@@ -197,6 +129,14 @@
                 if (sth_null) {
                     this.showWarn = true;
                     setInterval(() => {this.showWarn=false}, 3000);
+                } else {
+                    // TODO: 添加上传文件功能
+                    this.$store.dispatch({
+                        type: "submitAnswer",
+                        target: this.target,
+                        id: this.id,
+                        op: this.op
+                    })
                 }
             }
         }

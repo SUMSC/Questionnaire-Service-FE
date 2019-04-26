@@ -4,157 +4,140 @@ import * as types from "./mutation-types";
 import * as queries from "../utils/queries";
 import * as mutations from "../utils/db_mutations";
 import * as auth from "../utils/auth";
-import {api} from "../utils/resource";
+import {search_api, update_api, insert_api, delete_api, select_api} from "../utils/resource";
 import {log, debug, warn, error} from "../utils/lib";
 
+const answerTarget = target =>
+    target === 'event' ? 'participate' :
+        target === 'qnaire' ? 'answer' :
+            target === 'anonymousQnaire' ? 'anonymousAnswer' : "";
 
 export default {
     async login(context, {id, password}) {
+
         log("User Login");
         // 获取 JSON Web Token
-        const webToken = await auth.userLogin(id, password)['data'];
+        let webToken = await auth.userLogin(id, password).then(res => res['data']);
         if (webToken['ok'] && auth.verify(webToken['message'])) {
             context.commit(types.UPDATE_AUTH_TOKEN, webToken['message']);
-            const userData = jwt.decode(webToken['message']);
-            let res = await api({
-                data: {
-                    query: mutations.createUser(`id idTag name`),
-                    variables: {idTag: userData['id'], name: userData['name']}
-                }
-            })['data']['data']['createUser'];
-            // 创建用户
-            if (res['ok']) {
-                log(`Create Success, Update User: ${res['user']['name']}`);
-                context.commit(types.UPDATE_USER, {...res['user'], usertype: userData['usertype']});
-            } else {
-                // 失败则获取已存在的用户 ID
-                res = await api({
-                    data: {
-                        query: queries.user(
-                            `
-                            id idTag name
-                            myEvent {id name detail Active}
-                            myParticipation {event {id name detail Active}}
-                            `
-                        ),
-                        variables: {idTag: userData['id']}
-                    }
-                })['data']['data'];
-                if (res['user'].length !== 0) {
-                    log(`Create Failed, Update User: ${res['user'][0]['name']}`);
-                    context.commit(types.UPDATE_USER, {...res['user'][0], usertype: userData['userType']});
-                    context.commit(types.UPDATE_MY_PARTICIPATE, res['user'][0]['myParticipation']);
-                    context.commit(types.UPDATE_MY_EVENT, res['user'][0]['myEvent']);
-                } else {
-                    warn(`No Such User, Login Failed`);
-                    return;
-                }
-            }
-
+            // 从 JWT 中获取一部分用户信息
+            const payload = jwt.decode(webToken['message']);
+            const updateUserInfo = userInfo => {
+                log(`Update User`, userInfo);
+                userInfo = userInfo['data'];
+                context.commit(types.UPDATE_USER, {
+                    ...userInfo,
+                    usertype: payload['usertype']
+                });
+                context.commit(types.UPDATE_MY_ANONYMOUS_QNAIRE, userInfo['my_anonymous_qnaire']);
+                context.commit(types.UPDATE_MY_EVENT, userInfo['my_event']);
+                context.commit(types.UPDATE_MY_PARTICIPATE, userInfo['my_participation']);
+                context.commit(types.UPDATE_MY_ANSWER, userInfo['my_answer']);
+                context.commit(types.UPDATE_MY_QNAIRE, userInfo['my_qnaire']);
+            };
+            // 尝试 GET UserInfo
+            select_api('user', {
+                "id_tag": payload['id']
+            }).then(updateUserInfo).catch(err => {
+                // 用户不存在时，创建新的用户
+                insert_api('user', {
+                    "id_tag": payload['id'],
+                    "name": payload['name']
+                }).then(updateUserInfo).catch(err => {
+                    warn(`Create Failed, Login Failed`, err);
+                });
+            }).then(() => {
+                context.commit(types.SHOW_LOGIN_SHEET, false);
+            });
         } else {
-            warn("Login Failed");
             // 登录失败
+            warn("Login Failed");
+            context.commit(types.SHOW_LOGIN_SHEET, false);
         }
-        context.commit(types.SHOW_LOGIN_SHEET, false);
+
     },
     // 获取我参加的活动
     async getMyParticipate(context) {
         log(`Get My Participate`);
-        const options = {
-            data: {
-                query: queries.participate(
-                    `event {id name detail Active}`
-                ),
-                variables: {
-                    userId: context.state.id
-                }
-            },
-            responseType: 'json',
-            headers: {
-                'Authorization': context.state.authToken
-            }
-        };
-        api(options).then(res => {
-            log('MyParticipate', res['data']['data']['participate']);
-            context.commit(types.UPDATE_MY_PARTICIPATE, res['data']['data']['participate']);
+        select_api('participate', {
+            'user_id': context.state.id
+        }).then(res => {
+            log('[MyParicipate]', res['data']);
+            context.commit(types.UPDATE_MY_PARTICIPATE, res['data']);
         }).catch(err => {
-            error('[MyParticipate]', err);
+            warn('[MyParicipate]', err);
         });
     },
     // 获取我创建的活动
     async getMyEvent(context) {
         log(`Get My Event`);
-        const options = {
-            data: {
-                query: queries.event(
-                    `id name detail Active`
-                ),
-                variables: {
-                    userId: context.state.id
-                }
-            },
-            responseType: 'json',
-            headers: {
-                'Authorization': context.state.authToken
-            }
-        };
-        api(options).then(res => {
-            log('MyEvent', res['data']['data']['event']);
-            context.commit(types.UPDATE_MY_EVENT, res['data']['data']['event']);
+        select_api('event', {
+            'creator_id': context.state.id
+        }).then(res => {
+            log('[MyEvent]', res['data']);
+            context.commit(types.UPDATE_MY_EVENT, res['data']);
         }).catch(err => {
-            error('MyEvent Error', err);
-        })
-    },
-    // 获取需要渲染的表单
-    async getForm(context, {target, id}) {
-        log(`Get Event Form`);
-        const options = {
-            data: {
-                query: queries[target](`form`),
-                variables: {
-                    id: id
-                },
-                responseType: 'json',
-                headers: {
-                    'Authorization': context.state.authToken
-                }
-            }
-        };
-        await api(options).then(res => {
-            const form = JSON.parse(res['data']['data'][target][0]['form']);
-            log(form);
-            context.commit(types.UPDATE_CURRENT_FORM, form);
+            warn('[MyEvent]', err);
         });
     },
-    async initAnswer(context, {target, op, id}) {
-        log(`Init Form & Answer`);
-        if (op === 'init') {
-            context.commit({
-                type: types.INIT_ANSWER,
-                form: {}
-            });
-        } else if (op === 'edit') {
-            target =
-                target === 'event' ? 'participate' :
-                target === 'qnaire' ? 'answer':
-                target === 'anonymousQnaire' ? 'anonymousAnswer': "";
-            const options = {
-                data: {
-                    query: queries[target](`answer`),
-                    variables: {
-                        userId: context.state.id,
-                        id: id
-                    }
-                }
-            };
-            api(options).then((res => {
-                res = res['data']['data'];
-                log("GET My Answer", res);
-                context.commit({
-                    type: types.INIT_ANSWER,
-                    form: JSON.parse(res['participate'][0]['answer'])
-                });
-            }))
-        }
-    }
+    // 获取需要渲染的表单
+    // async getForm(context, {target, id}) {
+    //     log(`Get Event Form`);
+    //     const options = {
+    //         data: {
+    //             query: queries[target](`form`),
+    //             variables: {
+    //                 id: id
+    //             }
+    //         }
+    //     };
+    //     await api(options).then(res => {
+    //         res = JSON.parse(res['data']['data'][target][0]['form']);
+    //         log(`This Form`, res);
+    //         context.commit(types.UPDATE_CURRENT_FORM, res);
+    //     });
+    // },
+    // async initAnswer(context, {target, op, id}) {
+    //     log(`Init Form & Answer`);
+    //     if (op === 'edit') {
+    //         target = answerTarget(target);
+    //         const options = {
+    //             data: {
+    //                 query: queries[target](`answer`),
+    //                 variables: {
+    //                     userId: context.state.id,
+    //                     id: id
+    //                 }
+    //             }
+    //         };
+    //         await api(options).then((res => {
+    //             res = JSON.parse(res['data']['data'][target][0]['answer']);
+    //             log("This Answer", res);
+    //             context.commit({
+    //                 type: types.INIT_ANSWER,
+    //                 form: res
+    //             });
+    //         }))
+    //     }
+    // },
+    // async submitAnswer(context, {target, id, op}) {
+    //     log(`Submit Answer`);
+    //     target = answerTarget(target);
+    //     const options = {
+    //         data: {
+    //             query: mutations[target](op)(`answer`),
+    //             variables: {
+    //                 userId: context.state.id,
+    //                 id: id,
+    //                 answer: JSON.stringify(context.state.currentAnswer)
+    //             }
+    //         }
+    //     };
+    //     api(options).then(res => {
+    //         res = res['data']['data'];
+    //         log(`POST My Answer`, res);
+    //     }).catch(err => {
+    //         warn(err);
+    //     })
+    // }
 }

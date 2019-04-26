@@ -20,14 +20,13 @@
         computed: {
             ...mapState(['id', 'myEvent'])
         },
-        mounted() {
-            log('Mount Get My Created Event');
+        beforeCreate() {
             this.$store.dispatch('getMyEvent');
         },
         methods: {
             clickItem(id) {
-                log(id);
-                this.$router.push({name: 'activity-info', params: {eventId: id}})
+                const event = this.myEvent.filter(item => item.id === id)[0];
+                this.$router.push({name: 'activity-info', params: {event}});
             }
         }
     }

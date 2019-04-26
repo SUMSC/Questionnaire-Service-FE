@@ -65,15 +65,17 @@ const routes = [
     {
         name: 'joined-activity',
         component: () => import('@/views/JoinedActivity/'),
+        props: route => ({data: route.query.event}),
         meta: {
             title: '参与的活动',
             main: false
         }
     },
     {
-        path: '/activity-info/:eventId',
+        path: '/activity-info',
         name: 'activity-info',
         component: () => import('@/views/ActivityInfo/'),
+        props: route => ({data: route.query.event}),
         meta: {
             title: '活动信息',
             main: false
