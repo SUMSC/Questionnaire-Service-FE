@@ -7,8 +7,10 @@ export const UPDATE_MY_QNAIRE = 'updateMyQnaire';
 export const UPDATE_MY_ANSWER = 'updateMyAnswer';
 export const UPDATE_MY_ANONYMOUS_QNAIRE = 'updateMyAnonymousQnaire';
 
+export const UPDATE_CURRENT_INFO = 'updateCurrentInfo';
 export const UPDATE_CURRENT_FORM = 'updateCurrentForm';
 export const UPDATE_CURRENT_ANSWER = 'updateCurrentAnswer';
+
 export const INIT_ANSWER = 'initAnswer';
 export const SET_ACTIVE_TAB = 'setActiveTab';
 export const SHOW_LOGIN_SHEET = 'showLoginSheet';

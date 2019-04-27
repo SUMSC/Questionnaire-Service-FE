@@ -36,11 +36,13 @@
         },
         props: ['required', '_answer', 'label', 'remark', 'index', 'options'],
         created() {
-            this.$store.commit({
-                type: types.UPDATE_CURRENT_ANSWER,
-                index: this.index,
-                answer: ""
-            })
+            if (!this.$store.state.currentAnswer[this.index]) {
+                this.$store.commit({
+                    type: types.UPDATE_CURRENT_ANSWER,
+                    index: this.index,
+                    answer: ""
+                })
+            }
         }
     }
 </script>

@@ -1,61 +1,54 @@
-<template>
-    <div class="form-body">
-        <van-popup
-                v-model="showWarn"
-                position="top"
-                :overlay="false"
-                lazy-render
-                close-on-click-overlay
-                :lock-scroll="false"
-        >
-            <p class="warn-message">
-                <van-icon name="fail" size="1.2rem" />
-                <span><b>
-                    请完成所有题目
-                </b></span>
-            </p>
-        </van-popup>
-        <div v-for="(item, index) in currentForm">
-            <PlainForm
-                    v-if="item.type === 'plain'"
-                    :key="index"
-                    v-bind="{...item.data, index}"
-            />
-            <InputForm
-                    v-if="item.type === 'input'"
-                    :key="index"
-                    v-bind="{...item.data, index}"
-            />
-            <RadioForm
-                    v-if="item.type === 'radio'"
-                    :key="index"
-                    v-bind="{...item.data, index}"
-            />
-            <SelectForm
-                    v-if="item.type === 'select'"
-                    :key="index"
-                    v-bind="{...item.data, index}"
-            />
-            <CheckboxForm
-                    v-if="item.type === 'checkbox'"
-                    :key="index"
-                    v-bind="{...item.data, index}"
-            />
-            <RateForm
-                    v-if="item.type === 'rate'"
-                    :key="index"
-                    v-bind="{...item.data, index}"
-            />
-            <UploadForm
-                    v-if="item.type === 'upload'"
-                    :key="index"
-                    v-bind="{...item.data, index}"
-            />
-        </div>
-        <div class="submit-btn">
-            <van-button size="large" type="info" @click="submit">提交</van-button>
-        </div>
-    </div>
+<template lang="pug">
+    div(class="form-body")
+        van-popup(
+            v-model="showWarn"
+            position="top"
+            :overlay="false"
+            lazy-render
+            close-on-click-overlay
+            :lock-scroll="false"
+        )
+            p(class="warn-message")
+                van-icon(name="fail" size="1.2rem")/
+                span: b 请完成所有题目
+        div(v-for="(item, index) in currentForm")
+            PlainForm(
+                v-if="item.type === 'plain'"
+                :key="index"
+                v-bind="{...item.data, index}"
+            )
+            InputForm(
+                v-if="item.type === 'input'"
+                :key="index"
+                v-bind="{...item.data, index}"
+            )
+            RadioForm(
+                v-if="item.type === 'radio'"
+                :key="index"
+                v-bind="{...item.data, index}"
+            )
+            SelectForm(
+                v-if="item.type === 'select'"
+                :key="index"
+                v-bind="{...item.data, index}"
+            )
+            CheckboxForm(
+                v-if="item.type === 'checkbox'"
+                :key="index"
+                v-bind="{...item.data, index}"
+            )
+            RateForm(
+                v-if="item.type === 'rate'"
+                :key="index"
+                v-bind="{...item.data, index}"
+            )
+            UploadForm(
+                v-if="item.type === 'upload'"
+                :key="index"
+                v-bind="{...item.data, index}"
+            )
+        div(class="submit-btn")
+            van-button(size="large" type="info" @click="submit") 提交
 </template>
 
 <script>
@@ -75,8 +68,9 @@
         components: {PlainForm, UploadForm, RateForm, CheckboxForm, SelectForm, RadioForm, InputForm},
         computed: {
             currentForm() {
-                let form = this.$store.state.currentForm;
+                let form = JSON.parse(this.$store.state.currentInfo.form || "{}");
                 let answer = this.$store.state.currentAnswer;
+                log(form, answer);
                 for (let i in answer) {
                     Vue.set(form[i]['data'], '_answer', answer[i]);
                 }
@@ -88,26 +82,11 @@
                 showWarn: false
             }
         },
-        props: ['target', 'id', 'op'],
-        mounted() {
-            this.$store.dispatch({
-                type: 'getForm',
-                target: this.target,
-                id: this.id
-            });
-            this.$store.dispatch({
-                type: 'initAnswer',
-                target: this.target,
-                op: this.op,
-                id: this.id
-            })
-        },
+        props: ['target', 'id', 'relationship'],
         methods: {
             submit() {
                 const answer = this.$store.state.currentAnswer;
                 let sth_null = false;
-                log(this.currentForm);
-                log(answer);
                 for (let i in answer) {
                     const formItem = this.currentForm[i];
                     if (formItem.data.required) {
@@ -135,7 +114,7 @@
                         type: "submitAnswer",
                         target: this.target,
                         id: this.id,
-                        op: this.op
+                        op: this.relationship
                     })
                 }
             }

@@ -12,6 +12,9 @@ const answerTarget = target =>
         target === 'qnaire' ? 'answer' :
             target === 'anonymousQnaire' ? 'anonymousAnswer' : "";
 
+const columnTarget = target =>
+    /qnaire/.test(target) ? 'qnaire_id' : 'event_id';
+
 export default {
     async login(context, {id, password}) {
 
@@ -80,46 +83,36 @@ export default {
             warn('[MyEvent]', err);
         });
     },
-    // 获取需要渲染的表单
-    // async getForm(context, {target, id}) {
-    //     log(`Get Event Form`);
-    //     const options = {
-    //         data: {
-    //             query: queries[target](`form`),
-    //             variables: {
-    //                 id: id
-    //             }
-    //         }
-    //     };
-    //     await api(options).then(res => {
-    //         res = JSON.parse(res['data']['data'][target][0]['form']);
-    //         log(`This Form`, res);
-    //         context.commit(types.UPDATE_CURRENT_FORM, res);
-    //     });
-    // },
-    // async initAnswer(context, {target, op, id}) {
-    //     log(`Init Form & Answer`);
-    //     if (op === 'edit') {
-    //         target = answerTarget(target);
-    //         const options = {
-    //             data: {
-    //                 query: queries[target](`answer`),
-    //                 variables: {
-    //                     userId: context.state.id,
-    //                     id: id
-    //                 }
-    //             }
-    //         };
-    //         await api(options).then((res => {
-    //             res = JSON.parse(res['data']['data'][target][0]['answer']);
-    //             log("This Answer", res);
-    //             context.commit({
-    //                 type: types.INIT_ANSWER,
-    //                 form: res
-    //             });
-    //         }))
-    //     }
-    // },
+    async getCurrentInfo(context, {target, id}) {
+        log(`Get Current Info`);
+        await select_api(target, {id}).then(res => {
+            context.commit(types.UPDATE_CURRENT_INFO, res['data'][0]);
+        }).catch(err => {
+            warn('[UpdateInfo]', err);
+        })
+    },
+    async getCurrentAnswer(context, {target, id}) {
+        log(`Get Current Answer`);
+        const modelTarget = answerTarget(target);
+        const idTarget = columnTarget(target);
+        const answer = await select_api(modelTarget, {
+            user_id: context.state.id,
+            [idTarget]: id
+        }).then(res => {
+            context.commit(types.INIT_ANSWER, JSON.parse(res['data'][0]['answer']));
+        })
+    },
+    async submitAnswer(context, {target, id, op}) {
+        const modelTarget = answerTarget(target); // 判断是问卷、匿名问卷还是活动
+        const idTarget = columnTarget(target);  //
+        (op === 'stranger' ? insert_api : update_api)(modelTarget, {
+            user_id: context.state.id,
+            [idTarget]: id,
+            answer: context.state.currentAnswer
+        }).then(res => {
+            log(res)
+        }).catch(err => warn(err));
+    },
     // async submitAnswer(context, {target, id, op}) {
     //     log(`Submit Answer`);
     //     target = answerTarget(target);

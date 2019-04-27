@@ -47,11 +47,13 @@
             }
         },
         created() {
-            this.$store.commit({
-                type: types.UPDATE_CURRENT_ANSWER,
-                index: this.index,
-                answer: null
-            })
+            if (!this.$store.state.currentAnswer[this.index]) {
+                this.$store.commit({
+                    type: types.UPDATE_CURRENT_ANSWER,
+                    index: this.index,
+                    answer: null
+                })
+            }
         }
     }
 </script>

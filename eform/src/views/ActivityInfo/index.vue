@@ -1,10 +1,7 @@
 <template>
     <div class="page">
-        <div class="loading" v-if="loading">
-            <van-loading/>
-        </div>
-        <div class="info-page" v-else>
-            <h1 class="title">{{title}}</h1>
+        <div class="info-page">
+            <h1 class="title">{{info.name}}</h1>
             <van-row type="flex" justify="center">
                 <van-col class="tags" span="16">
                     <van-tag
@@ -20,7 +17,7 @@
             </van-row>
             <van-row type="flex" justify="center">
                 <van-col class="detail" span="20">
-                    <p>{{detail}}</p>
+                    <p>{{info.detail}}</p>
                 </van-col>
             </van-row>
             <van-row type="flex" justify="center">
@@ -29,85 +26,88 @@
                         <b>活动开始时间：</b>
                     </p>
                     <p>
-                        <span>{{start_time}}</span>
+                        <span>{{timeFormat(info.start_time || info.creator_name)}}</span>
                     </p>
                     <p>
                         <b>报名截止时间：</b>
                     </p>
                     <p>
-                        <span>{{deadline}}</span>
+                        <span>{{timeFormat(info.deadline)}}</span>
                     </p>
                 </van-col>
             </van-row>
 
-            <div class="join-event" v-if="active">
+            <div class="join-event" v-if="info._active">
                 <van-button
-                        v-if="relation === 'stranger'"
-                        size="large"
-                        type="info"
-                        @click="joinActivity"
-                >参与活动</van-button>
-                <van-button
-                        v-else-if="relation === 'participant'"
+                        v-if=""
                         size="large"
                         type="info"
                         @click="editAnswer"
-                >修改我的报名表</van-button>
+                >{{relationship === 'stranger'?'参与活动':'修改我的报名表'}}</van-button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import {getEventById} from "../../utils/resource";
-    import {log, timeFormat} from "../../utils/lib";
+    import {log, warn, timeFormat} from "../../utils/lib";
+    import * as types from "../../store/mutation-types";
 
     export default {
         name: "ActivityInfo",
         computed: {
             // 判断与当前活动有什么关系
-            relation() {
-                const owner = this.$store.state.myEvent.filter(
-                    item => item.id === this.$route.params.eventId
-                ).length !== 0;
-                const participant = this.$store.state.myParticipate.filter(
-                    item => item.event.id === this.$route.params.eventId
-                ).length !== 0;
-                if (owner) {
-                    return 'owner';
-                } else if (participant){
-                    return 'participant';
-                } else
-                    return 'stranger';
+            info() {
+                return this.$store.state.currentInfo;
+            },
+            tagList() {
+                return [`创建者：${this.info.creator?this.info.creator.name:""}`];
             }
         },
         data() {
             return {
-                title: this.data['name'],
-                tagList: [`创建者：${this.data['creator']['name']}`],
-                detail: this.data['detail'],
-                start_time: timeFormat(this.data['start_time']),
-                deadline: timeFormat(this.data['deadline']),
-                active: this.data['_active']
+                relationship: "stranger"
             }
         },
-        methods: {
-            joinActivity() {
-                this.$router.push({name: 'activity-form', query: {
-                    id: this.$route.params.eventId,
-                    op: 'init',
-                    target: 'event'
-                }});
+        watch: {
+            relationship: function(to, from) {
+                if (to === 'participant') {
+                    this.$store.dispatch({
+                        type: "getCurrentAnswer",
+                        target: this.target,
+                        id: this.id
+                    })
+                } else {
+                    this.$store.commit(types.INIT_ANSWER, {});
+                }
             },
+            info: function(to, from) {
+                if (this.$store.state.id === to.creator_id)
+                    this.relationship = 'owner';
+                else if (to.participant && to.participant.filter(
+                    item => item.user_id === this.$store.state.id
+                ).length !== 0)
+                    this.relationship = 'participant';
+            }
+        },
+        props: ['target', 'id'],
+        methods: {
             editAnswer() {
                 this.$router.push({name: 'activity-form', query: {
-                    id: this.$route.params.eventId,
-                    op: 'edit',
-                    target: 'event'
+                    id: this.info.id,
+                    target: 'event',
+                    op: this.relationship
                 }});
-            }
+            },
+            timeFormat
         },
-        props: ['data'],
+        async beforeMount() {
+            this.$store.dispatch({
+                type: 'getCurrentInfo',
+                target: this.target,
+                id: this.id
+            });
+        }
     }
 </script>
 

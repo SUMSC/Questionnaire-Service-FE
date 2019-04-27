@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import store from './store/'
 import * as types from './store/mutation-types'
+import {log} from './utils/lib'
 
 Vue.use(Router);
 
@@ -65,7 +66,6 @@ const routes = [
     {
         name: 'joined-activity',
         component: () => import('@/views/JoinedActivity/'),
-        props: route => ({data: route.query.event}),
         meta: {
             title: '参与的活动',
             main: false
@@ -75,10 +75,17 @@ const routes = [
         path: '/activity-info',
         name: 'activity-info',
         component: () => import('@/views/ActivityInfo/'),
-        props: route => ({data: route.query.event}),
+        props: route => route.query,
         meta: {
             title: '活动信息',
             main: false
+        },
+        beforeEnter: (to, from, next) => {
+            if (to.query.op === 0) {
+                next({path: '/mine'})
+            } else {
+                next();
+            }
         }
     },
     {

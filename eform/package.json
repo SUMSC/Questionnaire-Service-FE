@@ -12,6 +12,8 @@
     "dayjs": "^1.8.12",
     "jsonwebtoken": "^8.5.1",
     "mand-mobile": "^2.1.6",
+    "pug": "^2.0.3",
+    "pug-plain-loader": "^1.0.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "vant": "^1.6.9",

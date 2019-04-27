@@ -20,6 +20,7 @@ export default {
         state.idTag = id_tag;
         state.userType = usertype === '1' ? '学生' : '老师';
     },
+
     // 更新我创建的活动
     [types.UPDATE_MY_EVENT] (state, myEvent) {
         state.myEvent = myEvent;
@@ -37,12 +38,16 @@ export default {
     [types.UPDATE_MY_ANONYMOUS_QNAIRE] (state, myAnonymousQnaire) {
         state.myAnonymousQnaire = myAnonymousQnaire;
     },
+
+    [types.UPDATE_CURRENT_INFO] (state, info) {
+        state.currentInfo = info;
+    },
     // 更新当前页面需要显示的答案
     [types.UPDATE_CURRENT_ANSWER] (state, {index, answer}) {
         Vue.set(state.currentAnswer, index, answer);
     },
     // 初始化答案
-    [types.INIT_ANSWER] (state, {form}) {
+    [types.INIT_ANSWER] (state, form) {
         for (let i in form) {
             Vue.set(state.currentAnswer, i, form[i]);
         }

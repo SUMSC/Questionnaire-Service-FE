@@ -27,7 +27,7 @@ api.interceptors.request.use(config => {
 //     return Promise.reject(error);
 // });
 
-export const update_api = (model, data) => {
+export const update_api = async (model, data) => {
     return api({
         url: model,
         method: 'PUT',
@@ -35,7 +35,7 @@ export const update_api = (model, data) => {
     }).then(res => res['data']);
 };
 
-export const delete_api = (model, data) => {
+export const delete_api = async (model, data) => {
     return api({
         url: model,
         method: 'DELETE',
@@ -43,7 +43,7 @@ export const delete_api = (model, data) => {
     }).then(res => res['data']);
 };
 
-export const insert_api = (model, data) => {
+export const insert_api = async (model, data) => {
     return api({
         url: model,
         method: 'POST',
@@ -51,7 +51,7 @@ export const insert_api = (model, data) => {
     }).then(res => res['data']);
 };
 
-export const select_api = (model, data) => {
+export const select_api = async (model, data) => {
     return api({
         url: model,
         method: 'GET',
