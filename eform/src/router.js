@@ -48,26 +48,20 @@ const routes = [
         }
     },
     {
+        path: '/mine/:target',
+        name: 'mine-data',
+        component: () => import('@/views/Mine/MyList'),
+        props: true,
+        meta: {
+            title: '',
+            main: false
+        }
+    },
+    {
         name: 'about',
         component: () => import('@/views/About/'),
         meta: {
             title: '关于我们',
-            main: false
-        }
-    },
-    {
-        name: 'created-activity',
-        component: () => import('@/views/CreatedActivity/'),
-        meta: {
-            title: '创建的活动',
-            main: false
-        }
-    },
-    {
-        name: 'joined-activity',
-        component: () => import('@/views/JoinedActivity/'),
-        meta: {
-            title: '参与的活动',
             main: false
         }
     },
@@ -81,11 +75,7 @@ const routes = [
             main: false
         },
         beforeEnter: (to, from, next) => {
-            if (to.query.op === 0) {
-                next({path: '/mine'})
-            } else {
-                next();
-            }
+            next();
         }
     },
     {
@@ -110,7 +100,26 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-    const title = to.meta && to.meta.title;
+    let title = to.meta && to.meta.title;
+    if (title === '') {
+        switch (to.params.target) {
+            case 'event':
+                title = "我发起的活动";
+                break;
+            case 'participate':
+                title = "我报名的活动";
+                break;
+            case 'qnaire':
+                title = "我发布的问卷";
+                break;
+            case 'anonymous_qnaire':
+                title = "我发布的匿名问卷";
+                break;
+            case 'answer':
+                title = "我提交的答卷";
+                break;
+        }
+    }
     const main = to.meta && to.meta.main;
     document.title = `${title ? title : '首页'} - 苏大易表单`;
     store.commit(types.CHANGE_PAGE_TYPE, !!main);

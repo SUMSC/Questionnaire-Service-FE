@@ -10,10 +10,18 @@ import {log, debug, warn, error} from "../utils/lib";
 const answerTarget = target =>
     target === 'event' ? 'participate' :
         target === 'qnaire' ? 'answer' :
-            target === 'anonymousQnaire' ? 'anonymousAnswer' : "";
+            target === 'anonymousQnaire' ? 'anonymousAnswer' : target;
+
+const foreignTarget = target =>
+    target === 'participate' ? 'event':
+        target === 'anonymous_answer'? 'anonymous_qnaire':
+            target === 'answer'? "qnaire": target;
 
 const columnTarget = target =>
     /qnaire/.test(target) ? 'qnaire_id' : 'event_id';
+
+const ownershipTarget = target =>
+    /event|qnaire/.test(target) ? 'creator_id': 'user_id';
 
 export default {
     async login(context, {id, password}) {
@@ -60,32 +68,20 @@ export default {
 
     },
     // 获取我参加的活动
-    async getMyParticipate(context) {
-        log(`Get My Participate`);
-        select_api('participate', {
-            'user_id': context.state.id
+    async getMyBackref(context, target) {
+        log(`Get My ${target}`);
+        select_api(target, {
+            [ownershipTarget(target)]: context.state.id
         }).then(res => {
-            log('[MyParicipate]', res['data']);
-            context.commit(types.UPDATE_MY_PARTICIPATE, res['data']);
+            log(`[My ${target}]`, res['data']);
+            context.commit(types[`UPDATE_MY_${target.toUpperCase()}`], res['data']);
         }).catch(err => {
-            warn('[MyParicipate]', err);
-        });
-    },
-    // 获取我创建的活动
-    async getMyEvent(context) {
-        log(`Get My Event`);
-        select_api('event', {
-            'creator_id': context.state.id
-        }).then(res => {
-            log('[MyEvent]', res['data']);
-            context.commit(types.UPDATE_MY_EVENT, res['data']);
-        }).catch(err => {
-            warn('[MyEvent]', err);
+            warn(`[My ${target}]`, err);
         });
     },
     async getCurrentInfo(context, {target, id}) {
-        log(`Get Current Info`);
-        await select_api(target, {id}).then(res => {
+        log(`Get Current Info: ${target}`);
+        await select_api(foreignTarget(target), {id}).then(res => {
             context.commit(types.UPDATE_CURRENT_INFO, res['data'][0]);
         }).catch(err => {
             warn('[UpdateInfo]', err);
@@ -113,24 +109,4 @@ export default {
             log(res)
         }).catch(err => warn(err));
     },
-    // async submitAnswer(context, {target, id, op}) {
-    //     log(`Submit Answer`);
-    //     target = answerTarget(target);
-    //     const options = {
-    //         data: {
-    //             query: mutations[target](op)(`answer`),
-    //             variables: {
-    //                 userId: context.state.id,
-    //                 id: id,
-    //                 answer: JSON.stringify(context.state.currentAnswer)
-    //             }
-    //         }
-    //     };
-    //     api(options).then(res => {
-    //         res = res['data']['data'];
-    //         log(`POST My Answer`, res);
-    //     }).catch(err => {
-    //         warn(err);
-    //     })
-    // }
 }
